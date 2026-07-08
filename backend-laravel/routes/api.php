@@ -66,6 +66,10 @@ Route::middleware('auth:sanctum')->group(function () {
         ->middleware('permission:user.manage');
     Route::post('/users', [\App\Http\Controllers\UserController::class, 'store'])
         ->middleware('permission:user.manage');
+    Route::put('/users/{id}', [\App\Http\Controllers\UserController::class, 'update'])
+        ->middleware('permission:user.manage');
+    Route::delete('/users/{id}', [\App\Http\Controllers\UserController::class, 'destroy'])
+        ->middleware('permission:user.manage');
     Route::get('/users/roles', [\App\Http\Controllers\UserController::class, 'roles']);
 
     // 角色权限管理 — 需要 role.manage 权限

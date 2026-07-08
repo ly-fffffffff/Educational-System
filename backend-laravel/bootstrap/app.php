@@ -12,6 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        // 未认证时返回 401 而非重定向 (API SPA 架构)
+        $middleware->redirectGuestsTo(fn () => null);
+
         // ★ 注册自定义中间件的别名
         // 使用方式：Route::middleware('permission:student.manage')->group(...)
         $middleware->alias([
